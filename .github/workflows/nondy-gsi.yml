@@ -3,9 +3,9 @@ name: Building GSI..
 on: [push]
 
 env:
-  ROM_URL: https://otafsg1.h2os.com/patch/amazone2/GLO/OnePlus5TOxygen/OnePlus5TOxygen_43.J.69_GLO_069_2010292144/OnePlus5TOxygen_43_OTA_069_all_2010292144_de4a6fa.zip
+  ROM_URL: https://github.com/Foxtrot47/device_xiaomi_vayu/releases/download/alpha-1/aospa-sapphire-1-vayu-alpha-20220126.zip
   ROM_NAME: OxygenOS
-  ZIP_NAME: Oxygen-test
+  ZIP_NAME: aospa-sapphire.zip
   TZ: Asia/Kolkata
 jobs:
   build:
@@ -42,6 +42,23 @@ jobs:
        - name: Download Stock Rom & Generate GSI
          run: sudo ./ErfanGSIs/url2GSI.sh $ROM_URL $ROM_NAME
        
+       
+       - name: Zip Aonly and upload 
+         run: |
+              mkdir final
+              sudo chmod -R 777 ErfanGSIs/output
+              cd ErfanGSIs/output
+              7z a $ZIP_NAME-GSI-Aonly.7z *-Aonly-*.img
+              expect -c " 
+              
+      # Only upload artifacts built on Linux
+       - name: Upload build artifact
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.sha }}
+          path: build
+          
        - name: Zip Aonly and upload 
          run: |
               mkdir final
