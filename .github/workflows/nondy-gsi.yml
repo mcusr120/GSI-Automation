@@ -42,7 +42,6 @@ jobs:
        - name: Download Stock Rom & Generate GSI
          run: sudo ./ErfanGSIs/url2GSI.sh $ROM_URL $ROM_NAME
        
-       
        - name: Zip Aonly and upload 
          run: |
               mkdir final
@@ -51,7 +50,6 @@ jobs:
               7z a $ZIP_NAME-GSI-Aonly.7z *-Aonly-*.img
               expect -c " 
               
-      # Only upload artifacts built on Linux
        - name: Upload build artifact
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v2
