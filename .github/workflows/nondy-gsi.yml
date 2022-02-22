@@ -1,7 +1,6 @@
 name: Building GSI..
 
 on: 
-
   workflow_dispatch:
 
 env:
