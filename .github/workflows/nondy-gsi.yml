@@ -1,6 +1,8 @@
 name: Building GSI..
 
-on: [push]
+on: 
+
+  workflow_dispatch:
 
 env:
   ROM_URL: https://github.com/Foxtrot47/device_xiaomi_vayu/releases/download/alpha-1/aospa-sapphire-1-vayu-alpha-20220126.zip
